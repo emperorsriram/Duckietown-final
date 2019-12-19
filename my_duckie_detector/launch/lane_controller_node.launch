@@ -1,0 +1,21 @@
+<launch>
+	<arg name="veh"/>
+	<arg name="config" default="baseline"/>
+	<arg name="pkg_name" default="my_duckie_detector" doc="name of the package"/>
+	<arg name="node_name" default="lane_controller_node" doc="name of the node"/>
+
+        <group ns="$(arg veh)">
+	    <node  pkg="$(arg pkg_name)" type="$(arg node_name).py" name="$(arg node_name)" output="screen" clear_params="true" required="true">
+	        <rosparam command="load" file="$(find my_duckie_detector)/src/lane_controller_node.easy_node.yaml"/>
+                
+	    </node>
+	</group>
+
+	<!-- Publication -->
+	<!-- ~wheels_control: duckietown_msgs/WheelsCmd. Wheels command for duckiebot. -->
+	
+	<!-- Subscription -->
+	<!-- ~lane_pose: duckietown_msgs/LanePose. LanePose from the lane filter -->
+
+
+</launch>
